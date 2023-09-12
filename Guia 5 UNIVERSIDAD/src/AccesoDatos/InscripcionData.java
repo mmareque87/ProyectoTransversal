@@ -60,7 +60,8 @@ private MateriaData mateData;
             while (rs.next()) {
                 Inscripcion inscripcion = new Inscripcion();
                 inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
-
+                inscripcion.setMateria(mateData.buscarMateria(rs.getInt("idMateria")));
+                inscripcion.setAlumno(aluData.buscarAlumno(rs.getInt("idAlumno")));
                 inscripcion.setNota(rs.getDouble("nota"));
                 inscList.add(inscripcion);
             }

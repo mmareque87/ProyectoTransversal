@@ -21,13 +21,15 @@ import java.util.ArrayList;
  * @author titun
  */
 public class MateriaData {
-     private Connection con = null;
 
-   public MateriaData(){
-     
+    private Connection con = null;
+
+    public MateriaData() {
+
         con = Conexion.getConexion();
-}
-public void guardarMateria(Materia materia) {
+    }
+
+    public void guardarMateria(Materia materia) {
 
         String sql = "INSERT INTO materia (nombre, anio, activo) VALUES (?,?,?)";
         try {
@@ -48,7 +50,8 @@ public void guardarMateria(Materia materia) {
         }
 
     }
-public Materia buscarMateria(int id) {
+
+    public Materia buscarMateria(int id) {
         Materia materia = null;
         String sql = "SELECT nombre, anio FROM materia WHERE idMateria=? AND activo=1";
         PreparedStatement ps = null;
@@ -67,72 +70,76 @@ public Materia buscarMateria(int id) {
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la materia");
-                ps.close();
+
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia " + ex.getMessage());
 
         }
         return materia;
     }
-public void modificarMateria (Materia materia){
-        String sql= "UPDATE materia SET nombre=?, anio=?, activo=? WHERE idMateria=? ";
+
+    public void modificarMateria(Materia materia) {
+        String sql = "UPDATE materia SET nombre=?, anio=?, activo=? WHERE idMateria=? ";
         PreparedStatement ps = null;
 
-    
-        try{
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isActivo());
-            int exito=ps.executeUpdate();
-            
-            if (exito==1){
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Modificada exitosamente");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "La materia no existe");
             }
-    }catch (SQLException ex){
-        JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia"+ ex.getMessage());
-        
-    }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia" + ex.getMessage());
 
-}
-public void eliminarMateria(int id){
-    try {
-        String sql= "UPDATE materia SET activo=0 WHERE idMateria=?";
-        PreparedStatement ps= con.prepareStatement(sql);
-        ps.setInt(1, id);
-        int fila=ps.executeUpdate();
-        
-        if (fila==1){
-            JOptionPane.showMessageDialog(null, "Se elimino la materia");
         }
-        
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
-    }
-}
-public List<Materia> listarMateria(){
-    List <Materia> materia=new ArrayList<>();
-    try{
-        String sql= "SELECT * FROM materia WHERE activo=1";
-        PreparedStatement ps=con.prepareStatement(sql);
-        ResultSet rs=ps.executeQuery();
-        while (rs.next()) {
-            Materia mater = new Materia();
-            mater.setIdMateria(rs.getInt("idMateria"));
-            mater.setNombre(rs.getString("nombre"));
-            mater.setAnio(rs.getInt("anio"));
-            mater.setActivo(rs.getBoolean("activo"));
-            materia.add(mater);
-    }
-    ps.close();
-    
-}catch (SQLException ex) {
-    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia "+ex.getMessage());
-}
-    return materia;
 
-}
+    }
+
+    public void eliminarMateria(int id) {
+        try {
+            String sql = "UPDATE materia SET activo=0 WHERE idMateria=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "Se elimino la materia");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+        }
+    }
+
+    public List<Materia> listarMateria() {
+        List<Materia> materia = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM materia WHERE activo=1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia mater = new Materia();
+                mater.setIdMateria(rs.getInt("idMateria"));
+                mater.setNombre(rs.getString("nombre"));
+                mater.setAnio(rs.getInt("anio"));
+                mater.setActivo(rs.getBoolean("activo"));
+                materia.add(mater);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia " + ex.getMessage());
+        }
+        return materia;
+
+    }
 }

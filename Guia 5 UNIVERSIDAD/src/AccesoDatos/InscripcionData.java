@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
  */
 package AccesoDatos;
 
@@ -79,7 +77,7 @@ public class InscripcionData {
         materias.clear();
 
         try {
-            String sql = "SELECT inscripcion.idMateria,nombre, anio FROM inscripcion," + "materia WHERE inscripcion.idMateria=materia.idMateria\n"
+            String sql = "SELECT inscripcion.idMateria,nombre, anio FROM inscripcion, materia WHERE inscripcion.idMateria=materia.idMateria\n"
                     + "AND inscripcion.idAlumno=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -101,11 +99,12 @@ public class InscripcionData {
         return materias;
     }
 ///// a hequear con los videos y teorias >>>>>>
-    
+
     public List<Inscripcion> obtenerInscripcionesXalumno(int id) {
         InscripcionData inscrdata = new InscripcionData();
         List<Inscripcion> inscList = new ArrayList<>();
-        inscList = inscrdata.obtenerInscripciones();
+        //inscList = inscrdata.obtenerInscripciones();
+        inscList.addAll(inscrdata.obtenerInscripciones());
 
         List<Inscripcion> inscListAlumno = new ArrayList<>();
         inscListAlumno.clear();
@@ -120,7 +119,32 @@ public class InscripcionData {
         }
         return inscListAlumno;
     }
-    
-    
+
+    public List<Materia> obtenerMateriasNoCursadas(int id) {
+        List<Materia> materias = new ArrayList<Materia>();
+        materias.clear();
+
+        try {
+            String sql = "SELECT* FROM materia WHERE activo=1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
+                        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
+
+            while (rs.next()) {
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("Anio"));
+                materias.add(materia);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener Inscripcion" + ex.getMessage());
+        }
+        return materias;
+    }
 
 }

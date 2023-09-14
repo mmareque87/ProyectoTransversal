@@ -33,12 +33,15 @@ public class InscripcionData {
         String sql = "INSERT INTO inscripcion (idAlumno, idMateria) VALUES (?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                     
             ps.setInt(1, insc.getAlumno().getIdAlumno());
+           System.out.println(insc.getAlumno().getIdAlumno());
             ps.setInt(2, insc.getMateria().getIdMateria());
+            System.out.println(insc.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                insc.setIdInscripcion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inscripcion añadida con exito");
             }
             ps.close();

@@ -23,11 +23,11 @@ public class Guia5UNIVERSIDAD {
 
     public static void main(String[] args) {
 
-        Alumno a1 = new Alumno(239999000, "Gonzalez", "Pepe", LocalDate.of(1980, 11, 23), true);
-        Materia m1 = new Materia("Matematica", 1, true);
-        Alumno a2 = new Alumno(210000000, "perez", "lorena", LocalDate.of(1978, 1, 4), true);
-        Alumno a3 = new Alumno(27123456, "Gimenez", "monica", LocalDate.of(1990, 5, 8), true);
-        Materia m2 = new Materia("Fisica", 1, true);
+        //Alumno a1 = new Alumno(239999000, "Gonzalez", "Pepe", LocalDate.of(1980, 11, 23), true);
+        //Materia m1 = new Materia("Matematica", 1, true);
+        Alumno a2 = new Alumno(3,210000000, "perez", "Josefina", LocalDate.of(1978, 1, 4), true);
+        //Alumno a3 = new Alumno(27123456, "Gimenez", "Estela", LocalDate.of(1990, 5, 8), true);
+        //Materia m2 = new Materia("Fisica", 1, true);
 
         AlumnoData ad = new AlumnoData();
         MateriaData md = new MateriaData();
@@ -62,8 +62,9 @@ public class Guia5UNIVERSIDAD {
 //prueba modificar alumno
 // UPDATE alumno SET dni=27123456, apellido="Gimenez", nombre= "Monica", fechaNacimiento=1999-5-8 WHERE idAlumno=7
 
-        Alumno x=new Alumno(7, 27123456, "Gimenez", "monica", LocalDate.of(1999, 5, 8), true);
-        ad.modificarAlumno(x);
+        
+        ad.modificarAlumno(a2);
+        //ad.eliminarAlumno(0);
     }
 
 }

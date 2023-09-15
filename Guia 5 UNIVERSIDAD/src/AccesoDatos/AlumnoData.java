@@ -144,7 +144,7 @@ public class AlumnoData {
             ps.setString(2, alumno.getApellido());
             ps.setInt(3, alumno.getDni());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            //ps.setBoolean(5, alumno.isActivo());
+            ps.setInt(5, alumno.getIdAlumno());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

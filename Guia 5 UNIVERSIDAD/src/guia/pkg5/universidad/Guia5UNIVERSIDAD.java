@@ -59,12 +59,15 @@ public class Guia5UNIVERSIDAD {
 //            System.out.println("---------------------------------------------");
 //        }
 
-//prueba modificar alumno
-// UPDATE alumno SET dni=27123456, apellido="Gimenez", nombre= "Monica", fechaNacimiento=1999-5-8 WHERE idAlumno=7
+//prueba modificar alumno y eliminar
+       
+        //ad.modificarAlumno(a2);
+        //ad.eliminarAlumno(0);
+        
+//buscar materia por id
 
         
-        ad.modificarAlumno(a2);
-        //ad.eliminarAlumno(0);
+        
     }
 
 }

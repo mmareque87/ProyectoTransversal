@@ -169,10 +169,11 @@ public void actualizarNota(int idAlumno, int idMateria, double nota){
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al actualizar Nota : " + ex.getMessage());
         }
 
     }
+
 public List<Alumno> obtenerAlumnosXMaterias (int idMateria){
     List<Alumno> materiasCursadas = new ArrayList<>();
     
@@ -195,7 +196,7 @@ public List<Alumno> obtenerAlumnosXMaterias (int idMateria){
             }
             ps.close();
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null,"No se obtuvo la tabla alumno");
+        JOptionPane.showMessageDialog(null,"No se obtuvo la tabla alumno" +ex.getMessage());
     }
     return materiasCursadas;
 }

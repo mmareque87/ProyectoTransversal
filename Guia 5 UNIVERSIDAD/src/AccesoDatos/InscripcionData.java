@@ -165,6 +165,8 @@ public void actualizarNota(int idAlumno, int idMateria, double nota){
 
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error de parametros:no existe el ID de alumno o materia");
             }
             ps.close();
 
@@ -183,7 +185,9 @@ public List<Alumno> obtenerAlumnosXMaterias (int idMateria){
         ps = con.prepareStatement(sql);
         ps.setInt(1, idMateria);
         ResultSet rs = ps.executeQuery();
-        
+//        if (!rs.next()){
+//            JOptionPane.showMessageDialog(null, "La Materia no existe");
+//        }
         while(rs.next()){
              Alumno alu = new Alumno();
                 alu.setIdAlumno(rs.getInt("idAlumno"));

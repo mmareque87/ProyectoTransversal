@@ -24,7 +24,7 @@ public class Guia5UNIVERSIDAD {
     public static void main(String[] args) {
 
         //Alumno a1 = new Alumno(239999000, "Gonzalez", "Pepe", LocalDate.of(1980, 11, 23), true);
-        //Materia m1 = new Materia("Matematica", 1, true);
+        Materia m1 = new Materia("Matematica", 1, true);
         Alumno a2 = new Alumno(3,210000000, "perez", "Josefina", LocalDate.of(1978, 1, 4), true);
         //Alumno a3 = new Alumno(27123456, "Gimenez", "Estela", LocalDate.of(1990, 5, 8), true);
         //Materia m2 = new Materia("Fisica", 1, true);
@@ -66,8 +66,26 @@ public class Guia5UNIVERSIDAD {
         
 //buscar materia por id
 
-        
-        
-    }
+//md.modificarMateria(m1);
+//md.eliminarMateria(1);
+//
+//List<Materia> alux = new ArrayList<>();
+//        alux=md.listarMateria();
+//        for (Materia ma : alux) {
+//            System.out.println("nombre: " + ma.getNombre());
+//            System.out.println("anio: " + ma.getAnio());
+//            System.out.println("id: " + ma.getIdMateria());
+//            System.out.println("---------------------------------------------");
+
+  
+
+        for (Alumno alumno : id.obtenerAlumnosXMaterias(1)) {
+            System.out.println("nombre" + alumno.getNombre());
+        }
+
+//id.actualizarNota(3, 4, 8);
+ }
 
 }
+
+

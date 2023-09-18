@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -149,5 +151,53 @@ public class InscripcionData {
         }
         return materias;
     }
+public void actualizarNota(int idAlumno, int idMateria, double nota){
+    
+        String sql = "UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
 
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+public List<Alumno> obtenerAlumnosXMaterias (int idMateria){
+    List<Alumno> materiasCursadas = new ArrayList<>();
+    
+    String sql="SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, activo FROM inscripcion i, alumno a WHERE i.idAlumno=a.idAlumno AND idMateria=? AND a.activo=1";
+    try {
+        PreparedStatement ps;
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idMateria);
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()){
+             Alumno alu = new Alumno();
+                alu.setIdAlumno(rs.getInt("idAlumno"));
+                alu.setNombre(rs.getString("nombre"));
+                alu.setApellido(rs.getString("apellido"));
+                alu.setDni(rs.getInt("dni"));
+                alu.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+               alu.setActivo(rs.getBoolean("activo"));
+                materiasCursadas.add(alu);
+            }
+            ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null,"No se obtuvo la tabla alumno");
+    }
+    return materiasCursadas;
 }
+}
+

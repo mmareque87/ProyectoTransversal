@@ -233,7 +233,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                 jdcFechaNacimiento.setDate(null);
                 JOptionPane.showMessageDialog(this, "Producto no encontrado.");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El código a buscar debe ser un valor numérico válido.");
         }
 

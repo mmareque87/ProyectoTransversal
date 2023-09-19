@@ -73,6 +73,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jmGestionAlumno.setText("Formulario Alumno");
+        jmGestionAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmGestionAlumnoActionPerformed(evt);
+            }
+        });
         jmAlumno.add(jmGestionAlumno);
 
         jMenuBar1.add(jmAlumno);
@@ -121,13 +126,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
-       jdpEscritorio.removeAll();
+      
+    }//GEN-LAST:event_jmAlumnoActionPerformed
+
+    private void jmGestionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionAlumnoActionPerformed
+        // TODO add your handling code here:
+         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
        GestionAlumnos ga = new GestionAlumnos();
         ga.setVisible(true);
         jdpEscritorio.add(ga);
         jdpEscritorio.moveToFront(ga);
-    }//GEN-LAST:event_jmAlumnoActionPerformed
+    }//GEN-LAST:event_jmGestionAlumnoActionPerformed
 
     /**
      * @param args the command line arguments

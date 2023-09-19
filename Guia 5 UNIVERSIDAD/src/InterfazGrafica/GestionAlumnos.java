@@ -221,7 +221,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                 if (buscaDni.getDni()== Integer.parseInt(jtDocumento.getText()) && encontrado == false) {
                     jtApellido.setText(buscaDni.getApellido());
                     jtNombre.setText(buscaDni.getNombre()+ "");
-//                    jrbEstado.setSelectedIcon(buscaDni.get());
+                    jrbEstado.setSelected(buscaDni.isActivo());
                     jdcFechaNacimiento.setDateFormatString(buscaDni.getFechaNacimiento()+ "");
                     encontrado = true;
                 }
@@ -229,7 +229,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             if (encontrado == false) {
                 jtApellido.setText("");
                 jtNombre.setText("");
-//                jcRubro.setSelectedItem(null);
+                //jrbEstado.setSelected();
                 jdcFechaNacimiento.setDate(null);
                 JOptionPane.showMessageDialog(this, "Producto no encontrado.");
             }

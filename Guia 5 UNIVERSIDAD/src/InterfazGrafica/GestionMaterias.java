@@ -50,6 +50,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(600, 400));
+
         jLabel1.setText("Gestion Materias");
 
         jLabel2.setText("Codigo:");

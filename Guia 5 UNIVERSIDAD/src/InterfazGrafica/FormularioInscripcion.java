@@ -39,6 +39,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(600, 400));
+
         jLabel1.setText("Formulario de Inscripcion");
 
         jLabel2.setText("Seleccione un alumno: ");

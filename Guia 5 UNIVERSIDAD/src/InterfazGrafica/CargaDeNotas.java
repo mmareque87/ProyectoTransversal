@@ -35,6 +35,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
+        setPreferredSize(new java.awt.Dimension(600, 400));
+
         jLabel1.setText("Carga de Notas");
 
         jLabel2.setText("Seleccione un Alumno:");

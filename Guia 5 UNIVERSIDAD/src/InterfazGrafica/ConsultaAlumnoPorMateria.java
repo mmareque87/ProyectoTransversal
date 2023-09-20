@@ -34,6 +34,8 @@ public class ConsultaAlumnoPorMateria extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(600, 400));
+
         jLabel1.setText("Listado de Alumnos por Materia");
 
         jLabel2.setText("Seleccione una materia:");

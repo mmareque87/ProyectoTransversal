@@ -7,9 +7,11 @@ package InterfazGrafica;
 
 import AccesoDatos.AlumnoData;
 import Entidades.*;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -77,6 +79,11 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         });
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -93,6 +100,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
+
+        jdcFechaNacimiento.setDateFormatString("dd-MM-yyyy");
 
         jLabel7.setText("ACTIVO");
 
@@ -186,20 +195,24 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
         if (jtDocumento.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jrbEstado.isSelected() == true || jdcFechaNacimiento.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar todos los campos para actualizar un producto.");
+            JOptionPane.showMessageDialog(this, "Debe ingresar todos los campos para guardar o actualizar un alumno");
         } else {
             try {
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String apellido = jtApellido.getText();
                 String nombre = jtNombre.getText();
                 boolean activo = jrbEstado.isSelected();
-                LocalDate fecNac = LocalDate.parse(jdcFechaNacimiento.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyy"));
+//                java.util.Date utildate = jdcFechaNacimiento.getDate();
+//                java.sql.Date sqldate = new java.sql.Date(utildate.getTime());
+//                LocalDate fechaNac = sqldate.toLocalDate();
+                
+                LocalDate fechaNac = LocalDate.parse(jdcFechaNacimiento.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-                Alumno a1 = new Alumno(dni, apellido, nombre, fecNac, activo);
+                Alumno a1 = new Alumno(dni, apellido, nombre, fechaNac, activo);
                 AlumnoData ad = new AlumnoData();
                 ad.guardarAlumno(a1);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El codigo, precio y stock deben ser valores numéricos válidos.");
+                JOptionPane.showMessageDialog(this, "Debe poner un numero en DNI");
             }
 
         }
@@ -211,7 +224,10 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrbEstado.setSelected(false);
+        jdcFechaNacimiento.setDate(null);
 
         try {
             AlumnoData ad = new AlumnoData();
@@ -220,8 +236,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
             Alumno alumno = ad.buscarAlumnoPorDni(dni);
             jtApellido.setText(alumno.getApellido());
             jtNombre.setText(alumno.getNombre() + "");
-            jrbEstado.setEnabled(alumno.isActivo());
-            jdcFechaNacimiento.setDateFormatString(alumno.getFechaNacimiento() + "");
+            jrbEstado.setSelected(alumno.isActivo());
+            jdcFechaNacimiento.setDateFormatString(alumno.getFechaNacimiento().toString());
 
 //            System.out.println("dni :" +(dni+1));     //test
 //            for (Alumno buscaDni : ad.listarAlumnos()) {
@@ -248,6 +264,13 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrbEstado.setSelected(false);
+        jdcFechaNacimiento.setDate(null);
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

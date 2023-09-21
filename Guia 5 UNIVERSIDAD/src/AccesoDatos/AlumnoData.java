@@ -100,7 +100,6 @@ public class AlumnoData {
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
-                //en la teoria lo ponen aca. pero no va despues del else??
             }
             ps.close();
         } catch (SQLException ex) {
@@ -136,7 +135,7 @@ public class AlumnoData {
     }
 
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE ALUMNO SET nombre=?, apellido=?, dni=?, fechaNacimiento=? WHERE idAlumno=? ";
+        String sql = "UPDATE ALUMNO SET nombre=?, apellido=?, dni=?, fechaNacimiento=?, activo=? WHERE idAlumno=? ";
         PreparedStatement ps = null;
 
         try {
@@ -145,7 +144,8 @@ public class AlumnoData {
             ps.setString(2, alumno.getApellido());
             ps.setInt(3, alumno.getDni());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setInt(5, alumno.getIdAlumno());
+            ps.setBoolean(5, alumno.isActivo());
+            ps.setInt(6, alumno.getIdAlumno());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

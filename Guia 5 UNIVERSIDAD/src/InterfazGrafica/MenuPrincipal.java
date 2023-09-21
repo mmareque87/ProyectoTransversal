@@ -36,12 +36,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmAlumno = new javax.swing.JMenu();
         jmGestionAlumno = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmGestionMaterias = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jmManejoInscripciones = new javax.swing.JMenuItem();
+        jmManipulacionNotas = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jmAlumnoXmateria = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
@@ -86,25 +86,45 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Materia");
 
-        jMenuItem3.setText("Formulario Materia");
-        jMenu2.add(jMenuItem3);
+        jmGestionMaterias.setText("Formulario Materia");
+        jmGestionMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmGestionMateriasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmGestionMaterias);
 
         jMenuBar1.add(jMenu2);
 
         jMenu5.setText("Adminstracion");
 
-        jMenuItem4.setText("Manejo de Inscripciones");
-        jMenu5.add(jMenuItem4);
+        jmManejoInscripciones.setText("Manejo de Inscripciones");
+        jmManejoInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManejoInscripcionesActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmManejoInscripciones);
 
-        jMenuItem5.setText("Manpulacion de Notas");
-        jMenu5.add(jMenuItem5);
+        jmManipulacionNotas.setText("Manpulacion de Notas");
+        jmManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManipulacionNotasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmManipulacionNotas);
 
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Consulta");
 
-        jMenuItem6.setText("Alumnos por Materia");
-        jMenu6.add(jMenuItem6);
+        jmAlumnoXmateria.setText("Alumnos por Materia");
+        jmAlumnoXmateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlumnoXmateriaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmAlumnoXmateria);
 
         jMenuBar1.add(jMenu6);
 
@@ -128,18 +148,57 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
-      
+
     }//GEN-LAST:event_jmAlumnoActionPerformed
 
     private void jmGestionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionAlumnoActionPerformed
         // TODO add your handling code here:
-         jdpEscritorio.removeAll();
+        jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-       GestionAlumnos ga = new GestionAlumnos();
+        GestionAlumnos ga = new GestionAlumnos();
         ga.setVisible(true);
         jdpEscritorio.add(ga);
         jdpEscritorio.moveToFront(ga);
     }//GEN-LAST:event_jmGestionAlumnoActionPerformed
+
+    private void jmGestionMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionMateriasActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        GestionMaterias gm = new GestionMaterias();
+        gm.setVisible(true);
+        jdpEscritorio.add(gm);
+        jdpEscritorio.moveToFront(gm);
+    }//GEN-LAST:event_jmGestionMateriasActionPerformed
+
+    private void jmManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManejoInscripcionesActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        FormularioInscripcion fi = new FormularioInscripcion();
+        fi.setVisible(true);
+        jdpEscritorio.add(fi);
+        jdpEscritorio.moveToFront(fi);
+
+    }//GEN-LAST:event_jmManejoInscripcionesActionPerformed
+
+    private void jmManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManipulacionNotasActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        CargaDeNotas cn = new CargaDeNotas();
+        cn.setVisible(true);
+        jdpEscritorio.add(cn);
+        jdpEscritorio.moveToFront(cn);
+
+    }//GEN-LAST:event_jmManipulacionNotasActionPerformed
+
+    private void jmAlumnoXmateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoXmateriaActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ConsultaAlumnoPorMateria am = new ConsultaAlumnoPorMateria();
+        am.setVisible(true);
+        jdpEscritorio.add(am);
+        jdpEscritorio.moveToFront(am);
+
+    }//GEN-LAST:event_jmAlumnoXmateriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,9 +233,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 new MenuPrincipal().setVisible(true);
             }
         });
-        
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
@@ -188,12 +247,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JDesktopPane jdpEscritorio;
     private javax.swing.JMenu jmAlumno;
+    private javax.swing.JMenuItem jmAlumnoXmateria;
     private javax.swing.JMenuItem jmGestionAlumno;
+    private javax.swing.JMenuItem jmGestionMaterias;
+    private javax.swing.JMenuItem jmManejoInscripciones;
+    private javax.swing.JMenuItem jmManipulacionNotas;
     // End of variables declaration//GEN-END:variables
 }

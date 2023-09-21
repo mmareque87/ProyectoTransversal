@@ -80,7 +80,8 @@ public class AlumnoData {
 
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno alumno = null;
-        String sql = "SELECT  idAlumno,nombre, apellido, dni, fechaNacimiento FROM alumno WHERE dni=? AND activo=1";
+        //String sql = "SELECT  idAlumno,nombre, apellido, dni, fechaNacimiento FROM alumno WHERE dni=? AND activo=1";
+        String sql = "SELECT  idAlumno,nombre, apellido, dni, fechaNacimiento, activo FROM alumno WHERE dni=? ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -95,7 +96,7 @@ public class AlumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setActivo(true);
+                alumno.setActivo(rs.getBoolean("activo"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
@@ -135,7 +136,7 @@ public class AlumnoData {
     }
 
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE ALUMNO SET dni=?, apellido=?, nombre=?, fechaNacimiento=? WHERE idAlumno=? ";
+        String sql = "UPDATE ALUMNO SET nombre=?, apellido=?, dni=?, fechaNacimiento=? WHERE idAlumno=? ";
         PreparedStatement ps = null;
 
         try {

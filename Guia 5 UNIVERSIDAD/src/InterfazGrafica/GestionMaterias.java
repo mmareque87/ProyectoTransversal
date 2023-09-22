@@ -279,45 +279,37 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        
+
         jtNombre.setText("");
-        
+
         jrActivo.setSelected(false);
         jtAnio.setText("");
-        
+
         try {
             MateriaData md = new MateriaData();
-            
+
             int codigo = Integer.parseInt(jtCodigo.getText());
             Materia materia = md.buscarMateria(codigo);
             System.out.println(codigo);
-            
+
             jtNombre.setText(materia.getNombre());
             jtAnio.setText(materia.getAnio() + "");
             jrActivo.setSelected(materia.isActivo());
-            
-            if (!materia.isActivo()) {
-                jlActiva.setForeground(Color.red);
-            } else {
-                jlActiva.setForeground(Color.black);
-            }
-            
+
+        colorActivo(materia);
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar el campo ID con un valor numerico");
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar el campo con un ID valido");
         }
-        
+
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        jtNombre.setText("");
-        jtCodigo.setText("");
-        jrActivo.setSelected(false);
-        jtAnio.setText("");
-        jlActiva.setForeground(Color.black);
-
+        borrarCampos();
+        
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -325,6 +317,8 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+
+        JOptionPane.showMessageDialog(this, "EL NUEVO CODIGO SERA GENERADO AUTOMATICAMENTE");
         
         if (jtNombre.getText().isEmpty() || jtAnio.getText().isEmpty() || jrActivo.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Debe ingresar todos los campos para crear una materia, sin el ID");
@@ -334,20 +328,21 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                 String nombre = jtNombre.getText();
                 int anio = Integer.parseInt(jtAnio.getText());
                 boolean activo = jrActivo.isSelected();
-                
+
                 Materia m1 = new Materia(nombre, anio, activo);
 // pregunta de confirmacion                
-                int input = JOptionPane.showConfirmDialog(null, "Esta seguro de cargar la nueva Materia: " + nombre, "Seleccione una opcion...",
+                int input = JOptionPane.showConfirmDialog(null, "Esta seguro de cargar la nueva Materia  : " + codigo, "Seleccione una opcion...",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                 if (input == 0) {
                     MateriaData md = new MateriaData();
                     md.guardarMateria(m1);
+                    colorActivo(m1);
                 }
-                
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Debe poner un numero en ID");
             }
-            
+
         }
 
     }//GEN-LAST:event_jbNuevoActionPerformed
@@ -363,22 +358,21 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 md.eliminarMateria(codigo);
-                
-                jrActivo.setSelected(materia.isActivo());
-                jlActiva.setForeground(Color.red);
+
+ //               jrActivo.setSelected(materia.isActivo());
+                borrarCampos();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar el campo ID con un valor numerico.");
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar el campo con un ID");
         }
-        
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        
-        if (jtAnio.getText().isEmpty() || jtNombre.getText().isEmpty() || jrActivo.isSelected() == false ) {
+        if (jtAnio.getText().isEmpty() || jtNombre.getText().isEmpty() || jrActivo.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos para actualizar la MAteria , sin el ID");
         } else {
             try {
@@ -387,16 +381,17 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                 String nombre = jtNombre.getText();
                 boolean activo = jrActivo.isSelected();
 
-                MateriaData md=new MateriaData();
-                //Materia materia= md.buscarMateria(codigo);
-                Materia materia=new Materia(codigo, nombre, anio, activo);
-                
+                MateriaData md = new MateriaData();
+
+                Materia materia = new Materia(codigo, nombre, anio, activo);
+
 // pregunta de confirmacion                
                 int input = JOptionPane.showConfirmDialog(null, "Esta seguro de modificar la Materia: " + nombre, "Seleccione una opcion...",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                 if (input == 0) {
 
                     md.modificarMateria(materia);
+                    colorActivo(materia);
                 } else {
 /// poner los valores como figuraban antes??
                 }
@@ -434,4 +429,20 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void borrarCampos() {
+        jtNombre.setText("");
+        jtCodigo.setText("");
+        jrActivo.setSelected(false);
+        jtAnio.setText("");
+        jlActiva.setForeground(Color.black);
+    }
+    
+    private void colorActivo(Materia materia){
+            if (!materia.isActivo()) {
+                jlActiva.setForeground(Color.red);
+            } else {
+                jlActiva.setForeground(Color.black);
+            }
+    }
 }

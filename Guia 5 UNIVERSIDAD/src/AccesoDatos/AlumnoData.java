@@ -124,6 +124,7 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(rs.getBoolean("activo"));
                 alumnos.add(alumno);
+                
             }
             ps.close();
 

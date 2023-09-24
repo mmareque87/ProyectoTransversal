@@ -13,6 +13,7 @@ import Entidades.Inscripcion;
 import Entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -186,33 +187,32 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jrbNoInscripto.setSelected(false);
         limpiarTabla();
         InscripcionData id = new InscripcionData();
-        MateriaData md=new MateriaData();
+        MateriaData md = new MateriaData();
         Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
-        
-        List <Materia> listaMaterias= id.obtenerMateriasCursadas(alumnoSele.getIdAlumno());
-       // modelo.setRowCount(listaMaterias.size());
+
+        List<Materia> listaMaterias = id.obtenerMateriasCursadas(alumnoSele.getIdAlumno());
+        // modelo.setRowCount(listaMaterias.size());
         for (Materia listaMateria : listaMaterias) {
             modelo.addRow(new Object[]{
                 listaMateria.getIdMateria(),
                 listaMateria.getNombre(),
-                listaMateria.getAnio(),
-            });
+                listaMateria.getAnio(),});
         }
-                
+
     }//GEN-LAST:event_jrbInscriptoActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         AlumnoData ad = new AlumnoData();
         InscripcionData id = new InscripcionData();
         Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
-        
+
         if (jrbInscripto.isSelected()) {
             jrbInscriptoActionPerformed(evt);
-            
-        }else{
+
+        } else {
             jrbNoInscriptoActionPerformed(evt);
         }
-        
+
 //        String rubroSeleccionado = (String) jcbRubro.getSelectedItem();
 //        borraFilas();
 //        for(Producto produc: Menu.listaProductos){
@@ -231,18 +231,17 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jrbInscripto.setSelected(false);
         limpiarTabla();
         InscripcionData id = new InscripcionData();
-        MateriaData md=new MateriaData();
+        MateriaData md = new MateriaData();
         Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
-        
-        List <Materia> listaMaterias= id.obtenerMateriasNoCursadas(alumnoSele.getIdAlumno());
-       
+
+        List<Materia> listaMaterias = id.obtenerMateriasNoCursadas(alumnoSele.getIdAlumno());
+
         for (Materia listaMateria : listaMaterias) {
-            
+
             modelo.addRow(new Object[]{
                 listaMateria.getIdMateria(),
                 listaMateria.getNombre(),
-                listaMateria.getAnio(),
-            });
+                listaMateria.getAnio(),});
         }
     }//GEN-LAST:event_jrbNoInscriptoActionPerformed
 
@@ -251,11 +250,39 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
-        // TODO add your handling code here:
+        Alumno alumnoSel = (Alumno) jcbAlumnos.getSelectedItem();
+        int columnaSel = jtMaterias.getSelectedRow();
+
+       int idMateria = (Integer) modelo.getValueAt(columnaSel, 0);
+        InscripcionData id = new InscripcionData();
+                
+// pregunta de confirmacion                
+        int input = JOptionPane.showConfirmDialog(null, "Esta seguro desea borrar la Inscricpcion del Alumno: " + alumnoSel.getDni() +" > En la Materia ID: "+idMateria+"?", "Seleccione una opcion...",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+        if (input == 0) {
+            id.borrarInscripcionMateriaAlumno(alumnoSel.getIdAlumno(),idMateria);
+        }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        // TODO add your handling code here:
+        Alumno alumnoSel = (Alumno) jcbAlumnos.getSelectedItem();
+        int columnaSel = jtMaterias.getSelectedRow();
+        int idMat = (Integer) modelo.getValueAt(columnaSel, 0);
+
+        MateriaData md = new MateriaData();
+        Materia materiaSel = md.buscarMateria(idMat);
+
+        Inscripcion nueva = new Inscripcion(alumnoSel, materiaSel);
+        InscripcionData id = new InscripcionData();
+
+        // pregunta de confirmacion                
+        int input = JOptionPane.showConfirmDialog(null, "Esta seguro desea Inscricbir al Alumno: " + alumnoSel.getDni() +" > En la Materia: "+materiaSel.getNombre()+"?", "Seleccione una opcion...",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+        if (input == 0) {
+            id.guardarInscripcion(nueva);
+        }
+
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
 
@@ -295,8 +322,6 @@ private void armarCabecera() {
         for (Alumno alumno : listaAlumno) {
             jcbAlumnos.addItem(alumno);
         }
-
-        
 
     }
 }

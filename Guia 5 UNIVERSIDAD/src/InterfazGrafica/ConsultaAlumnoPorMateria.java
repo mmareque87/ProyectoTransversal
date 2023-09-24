@@ -5,7 +5,10 @@
  */
 package InterfazGrafica;
 
+import AccesoDatos.InscripcionData;
+import AccesoDatos.MateriaData;
 import Entidades.*;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,6 +48,12 @@ private DefaultTableModel modelo = new DefaultTableModel();
         jLabel1.setText("Listado de Alumnos por Materia");
 
         jLabel2.setText("Seleccione una materia:");
+
+        jcbMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMateriasActionPerformed(evt);
+            }
+        });
 
         jtAlumnosxMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +121,24 @@ private DefaultTableModel modelo = new DefaultTableModel();
        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriasActionPerformed
+        
+        limpiarTabla();
+        InscripcionData id = new InscripcionData();
+        MateriaData md = new MateriaData();
+        Materia mateSele = (Materia) jcbMaterias.getSelectedItem();
+
+        List<Alumno> listaAlumnos = id.obtenerAlumnosXMaterias(mateSele.getIdMateria());
+        for (Alumno listaAlumno : listaAlumnos) {
+            modelo.addRow(new Object[]{
+                listaAlumno.getIdAlumno(),
+                listaAlumno.getDni(),
+                listaAlumno.getApellido(),
+                listaAlumno.getNombre(),});
+
+        }
+    }//GEN-LAST:event_jcbMateriasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -137,3 +164,4 @@ private void armarCabecera() {
         }
 }
 }
+

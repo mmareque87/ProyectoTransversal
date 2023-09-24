@@ -5,9 +5,11 @@
  */
 package InterfazGrafica;
 
+import AccesoDatos.AlumnoData;
 import AccesoDatos.InscripcionData;
 import AccesoDatos.MateriaData;
 import Entidades.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +27,7 @@ private DefaultTableModel modelo = new DefaultTableModel();
     public ConsultaAlumnoPorMateria() {
         initComponents();
         armarCabecera();
+        cargarCombo();
     }
 
     /**
@@ -163,5 +166,16 @@ private void armarCabecera() {
             modelo.removeRow(f);
         }
 }
+  private void cargarCombo() {
+        MateriaData md=new MateriaData();
+        List<Materia> listaMaterias = new ArrayList<>();
+        listaMaterias = md.listarMateria();
+
+        for (Materia materia : listaMaterias) {
+            jcbMaterias.addItem(materia);
+            System.out.println(materia.getNombre());
+        }
+
+    }
 }
 

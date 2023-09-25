@@ -20,19 +20,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CargaDeNotas extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel(){
+    private DefaultTableModel modelo = new DefaultTableModel() {
 
-    public boolean isCellEditable(int f, int c) {
-        if (c == 2){
-          return true;
-        }else{
-       return false;
-    }
-    }
+        public boolean isCellEditable(int f, int c) {
+
+            return false;
+
+        }
     };
+
     /**
-         * Creates new form ActualizacionNotas
-         */
+     * Creates new form ActualizacionNotas
+     */
     public CargaDeNotas() {
         initComponents();
         armarCabecera();
@@ -56,6 +55,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jtNota = new javax.swing.JTextField();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(600, 400));
@@ -97,7 +97,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Seleccione un Alumno:");
+        jLabel3.setText("Cargar Nota: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +124,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3)
+                        .addGap(31, 31, 31)
+                        .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,9 +140,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                     .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
@@ -161,7 +165,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             int columnaSel = jtNotas.getSelectedRow();
             int idMat = (Integer) modelo.getValueAt(columnaSel, 0);
             String materia = modelo.getValueAt(columnaSel, 1).toString();
-            double nota = Double.parseDouble(modelo.getValueAt(columnaSel, 2).toString());
+            //String nota1= modelo.getValueAt(columnaSel, 2).toString();
+            //jtNota.setText(nota1);
+            double nota = Double.parseDouble(jtNota.getSelectedText());
 
             InscripcionData id = new InscripcionData();
 
@@ -169,6 +175,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             int input = JOptionPane.showConfirmDialog(null, "Esta seguro cargar la nota del alumno: " + alumnoSel.getApellido() + " > En la Materia: " + materia + ". Con la nota de: " + nota, "Seleccione una opcion...",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
+
                 id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
 
             }
@@ -190,6 +197,8 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 inscripcion.getMateria().getIdMateria(),
                 inscripcion.getMateria().getNombre(),
                 inscripcion.getNota(),});
+
+            jtNota.setText("" + inscripcion.getNota());
         }
 
     }//GEN-LAST:event_jcbAlumnosActionPerformed
@@ -203,6 +212,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbAlumnos;
+    private javax.swing.JTextField jtNota;
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
 
@@ -212,7 +222,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
         jtNotas.setModel(modelo);
-        
+
     }
 
     private void limpiarTabla() {

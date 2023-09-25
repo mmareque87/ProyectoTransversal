@@ -292,6 +292,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 id.guardarInscripcion(nueva);
+                
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Debe selecionar una materia No-Iscripta del Alumno ");

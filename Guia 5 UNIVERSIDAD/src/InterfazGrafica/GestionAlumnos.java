@@ -215,6 +215,8 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+      /// FALTA AGREGAR UN NULL EXCEPTION si no encuentra el alumno (id null)
+        
         if (jtDocumento.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jrbEstado.isSelected() == false || jdcFechaNacimiento.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos para actualizar el alumno");
         } else {

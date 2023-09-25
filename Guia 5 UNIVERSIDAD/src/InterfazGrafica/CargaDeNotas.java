@@ -5,7 +5,13 @@
  */
 package InterfazGrafica;
 
+import AccesoDatos.AlumnoData;
+import AccesoDatos.InscripcionData;
+import AccesoDatos.MateriaData;
 import Entidades.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,13 +20,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CargaDeNotas extends javax.swing.JInternalFrame {
 
- private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+
+    public boolean isCellEditable(int f, int c) {
+        if (c == 2){
+          return true;
+        }else{
+       return false;
+    }
+    }
+    };
     /**
-     * Creates new form ActualizacionNotas
-     */
+         * Creates new form ActualizacionNotas
+         */
     public CargaDeNotas() {
         initComponents();
         armarCabecera();
+        cargarCombo();
     }
 
     /**
@@ -34,11 +50,12 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcAlumnos = new javax.swing.JComboBox<>();
+        jcbAlumnos = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtNotas = new javax.swing.JTable();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(600, 400));
@@ -46,6 +63,12 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         jLabel1.setText("Carga de Notas");
 
         jLabel2.setText("Seleccione un Alumno:");
+
+        jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnosActionPerformed(evt);
+            }
+        });
 
         jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,29 +97,35 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Seleccione un Alumno:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jcAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(247, 247, 247)
-                            .addComponent(jLabel1))))
-                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jbGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addGap(42, 42, 42))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(247, 247, 247)
+                                .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel3)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,10 +135,12 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jcAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
@@ -120,37 +151,85 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-      this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+        try {
+
+            Alumno alumnoSel = (Alumno) jcbAlumnos.getSelectedItem();
+            int columnaSel = jtNotas.getSelectedRow();
+            int idMat = (Integer) modelo.getValueAt(columnaSel, 0);
+            String materia = modelo.getValueAt(columnaSel, 1).toString();
+            double nota = Double.parseDouble(modelo.getValueAt(columnaSel, 2).toString());
+
+            InscripcionData id = new InscripcionData();
+
+            // pregunta de confirmacion                
+            int input = JOptionPane.showConfirmDialog(null, "Esta seguro cargar la nota del alumno: " + alumnoSel.getApellido() + " > En la Materia: " + materia + ". Con la nota de: " + nota, "Seleccione una opcion...",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (input == 0) {
+                id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
+
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, "Debe selecionar una materia del Alumno ");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
+        AlumnoData ad = new AlumnoData();
+        InscripcionData id = new InscripcionData();
+        Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
+        List<Inscripcion> inscripXalum = id.obtenerInscripcionesXalumno(alumnoSele.getIdAlumno());
+        limpiarTabla();
+        //List<Materia> listaMaterias = id.obtenerMateriasCursadas(alumnoSele.getIdAlumno());
+
+        for (Inscripcion inscripcion : inscripXalum) {
+            modelo.addRow(new Object[]{
+                inscripcion.getMateria().getIdMateria(),
+                inscripcion.getMateria().getNombre(),
+                inscripcion.getNota(),});
+        }
+
+    }//GEN-LAST:event_jcbAlumnosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<Alumno> jcAlumnos;
+    private javax.swing.JComboBox<Alumno> jcbAlumnos;
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
 
-
-
-private void armarCabecera() {
+    private void armarCabecera() {
 
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
         jtNotas.setModel(modelo);
-}
-  private void limpiarTabla() {
+        
+    }
+
+    private void limpiarTabla() {
         int f = modelo.getRowCount() - 1;
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
-}
+    }
+
+    private void cargarCombo() {
+        AlumnoData ad = new AlumnoData();
+        List<Alumno> listaAlumno = new ArrayList<>();
+        listaAlumno = ad.listarAlumnos();
+
+        for (Alumno alumno : listaAlumno) {
+            jcbAlumnos.addItem(alumno);
+        }
+
+    }
 }

@@ -165,9 +165,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             int columnaSel = jtNotas.getSelectedRow();
             int idMat = (Integer) modelo.getValueAt(columnaSel, 0);
             String materia = modelo.getValueAt(columnaSel, 1).toString();
-            //String nota1= modelo.getValueAt(columnaSel, 2).toString();
+//            String nota= modelo.getValueAt(columnaSel, 2).toString();
             //jtNota.setText(nota1);
-            double nota = Double.parseDouble(jtNota.getSelectedText());
+            double nota = Double.parseDouble(jtNota.getText());
 
             InscripcionData id = new InscripcionData();
 
@@ -179,6 +179,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
 
             }
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una nota valida ");
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Debe selecionar una materia del Alumno ");
         }

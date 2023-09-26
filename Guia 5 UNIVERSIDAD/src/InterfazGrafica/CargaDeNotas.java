@@ -64,6 +64,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un Alumno:");
 
+        jcbAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbAlumnosMouseClicked(evt);
+            }
+        });
         jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbAlumnosActionPerformed(evt);
@@ -81,6 +86,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtNotasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtNotas);
 
         jbGuardar.setText("Guardar");
@@ -97,7 +107,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Cargar Nota: ");
+        jLabel3.setText("Actualizar  Nota: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,18 +178,21 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 //            String nota= modelo.getValueAt(columnaSel, 2).toString();
             //jtNota.setText(nota1);
             double nota = Double.parseDouble(jtNota.getText());
+            if (nota >= 1 && nota <= 10) {
+                InscripcionData id = new InscripcionData();
 
-            InscripcionData id = new InscripcionData();
+                // pregunta de confirmacion                
+                int input = JOptionPane.showConfirmDialog(null, "Esta seguro cargar la nota del alumno: " + alumnoSel.getApellido() + " > En la Materia: " + materia + ". Con la nota de: " + nota, "Seleccione una opcion...",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                if (input == 0) {
 
-            // pregunta de confirmacion                
-            int input = JOptionPane.showConfirmDialog(null, "Esta seguro cargar la nota del alumno: " + alumnoSel.getApellido() + " > En la Materia: " + materia + ". Con la nota de: " + nota, "Seleccione una opcion...",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
-            if (input == 0) {
-
-                id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
-                jcbAlumnosActionPerformed(evt);
+                    id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
+                    jcbAlumnosActionPerformed(evt);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe ingresar una nota valida entre 1 y 10");
             }
-            
+            jtNota.setText("");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe ingresar una nota valida ");
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -188,23 +201,35 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
-        AlumnoData ad = new AlumnoData();
-        InscripcionData id = new InscripcionData();
-        Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
-        List<Inscripcion> inscripXalum = id.obtenerInscripcionesXalumno(alumnoSele.getIdAlumno());
-        limpiarTabla();
-        //List<Materia> listaMaterias = id.obtenerMateriasCursadas(alumnoSele.getIdAlumno());
+        try {
 
-        for (Inscripcion inscripcion : inscripXalum) {
-            modelo.addRow(new Object[]{
-                inscripcion.getMateria().getIdMateria(),
-                inscripcion.getMateria().getNombre(),
-                inscripcion.getNota(),});
+            AlumnoData ad = new AlumnoData();
+            InscripcionData id = new InscripcionData();
+            Alumno alumnoSele = (Alumno) jcbAlumnos.getSelectedItem();
+            List<Inscripcion> inscripXalum = id.obtenerInscripcionesXalumno(alumnoSele.getIdAlumno());
+            limpiarTabla();
+            //List<Materia> listaMaterias = id.obtenerMateriasCursadas(alumnoSele.getIdAlumno());
 
-            jtNota.setText("" + inscripcion.getNota());
+            for (Inscripcion inscripcion : inscripXalum) {
+                modelo.addRow(new Object[]{
+                    inscripcion.getMateria().getIdMateria(),
+                    inscripcion.getMateria().getNombre(),
+                    inscripcion.getNota(),});
+//jtNotas.getValueAt(jtNotas.getSelectedRow(), 2);
+
+                
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
         }
-
     }//GEN-LAST:event_jcbAlumnosActionPerformed
+
+    private void jtNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtNotasMouseClicked
+        jtNota.setText("" + jtNotas.getValueAt(jtNotas.getSelectedRow(), 2));
+    }//GEN-LAST:event_jtNotasMouseClicked
+
+    private void jcbAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbAlumnosMouseClicked
+        jtNota.setText("");
+    }//GEN-LAST:event_jcbAlumnosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

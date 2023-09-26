@@ -11,9 +11,11 @@ import AccesoDatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
+import InterfazGrafica.MenuPrincipal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,10 +24,13 @@ import java.util.List;
 public class Guia5UNIVERSIDAD {
 
     public static void main(String[] args) {
+        
+//        MenuPrincipal mp = new MenuPrincipal();
+//        mp.setVisible(true);
 
         //Alumno a1 = new Alumno(239999000, "Gonzalez", "Pepe", LocalDate.of(1980, 11, 23), true);
         Materia m1 = new Materia("Matematica", 1, true);
-        Alumno a2 = new Alumno(3,210000000, "perez", "Josefina", LocalDate.of(1978, 1, 4), true);
+        Alumno a2 = new Alumno(3, 210000000, "perez", "Josefina", LocalDate.of(1978, 1, 4), true);
         //Alumno a3 = new Alumno(27123456, "Gimenez", "Estela", LocalDate.of(1990, 5, 8), true);
         //Materia m2 = new Materia("Fisica", 1, true);
 
@@ -58,14 +63,10 @@ public class Guia5UNIVERSIDAD {
 //            System.out.println("id: " + al.getIdAlumno());
 //            System.out.println("---------------------------------------------");
 //        }
-
 //prueba modificar alumno y eliminar
-       
         //ad.modificarAlumno(a2);
         //ad.eliminarAlumno(0);
-        
 //buscar materia por id
-
 //md.modificarMateria(m1);
 //md.eliminarMateria(1);
 //
@@ -76,16 +77,10 @@ public class Guia5UNIVERSIDAD {
 //            System.out.println("anio: " + ma.getAnio());
 //            System.out.println("id: " + ma.getIdMateria());
 //            System.out.println("---------------------------------------------");
-
-  
-
-        for (Alumno alumno : id.obtenerAlumnosXMaterias(1)) {
-            System.out.println("nombre" + alumno.getNombre());
-        }
-
+//        for (Alumno alumno : id.obtenerAlumnosXMaterias(1)) {
+//            System.out.println("nombre" + alumno.getNombre());
+//        }
 //id.actualizarNota(3, 4, 8);
- }
+    }
 
 }
-
-

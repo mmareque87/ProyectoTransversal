@@ -341,6 +341,7 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar el campo con un DNI");
         }
+        jbLimpiarActionPerformed(evt);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed

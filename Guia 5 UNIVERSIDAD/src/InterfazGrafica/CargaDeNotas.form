@@ -105,6 +105,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jcbAlumnosMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbAlumnosActionPerformed"/>
       </Events>
       <AuxValues>
@@ -129,6 +130,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtNotasMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -150,7 +154,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cargar Nota: "/>
+        <Property name="text" type="java.lang.String" value="Actualizar  Nota: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtNota">

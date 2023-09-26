@@ -177,7 +177,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             if (input == 0) {
 
                 id.actualizarNota(alumnoSel.getIdAlumno(), idMat, nota);
-
+                jcbAlumnosActionPerformed(evt);
             }
             
         } catch (NumberFormatException e) {

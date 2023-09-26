@@ -30,6 +30,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         cargarCombo();
         limpiarTabla();
         jrbInscripto.setSelected(true);
+        
     }
 
     /**
@@ -216,18 +217,6 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             jrbNoInscriptoActionPerformed(evt);
         }
 
-//        String rubroSeleccionado = (String) jcbRubro.getSelectedItem();
-//        borraFilas();
-//        for(Producto produc: Menu.listaProductos){
-//            
-//            if(produc.getRubro().toString().equalsIgnoreCase(rubroSeleccionado)){
-//                
-//                modelo.addRow(new Object[]{
-//                    produc.getCodigo(),
-//                    produc.getDescripcion(),
-//                    produc.getPrecio(),
-//                    produc.getStock(),
-//                });
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
     private void jrbNoInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptoActionPerformed
@@ -336,6 +325,6 @@ private void armarCabecera() {
         for (Alumno alumno : listaAlumno) {
             jcbAlumnos.addItem(alumno);
         }
-        
+       
     }
 }

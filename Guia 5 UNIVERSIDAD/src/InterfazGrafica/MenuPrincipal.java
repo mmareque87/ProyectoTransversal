@@ -108,7 +108,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jmManejoInscripciones);
 
-        jmManipulacionNotas.setText("Manpulacion de Notas");
+        jmManipulacionNotas.setText("Manipulacion de Notas");
         jmManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmManipulacionNotasActionPerformed(evt);

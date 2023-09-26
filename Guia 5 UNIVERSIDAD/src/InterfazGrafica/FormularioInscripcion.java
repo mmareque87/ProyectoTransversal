@@ -29,7 +29,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         armarCabecera();
         cargarCombo();
         limpiarTabla();
-        jrbInscripto.setSelected(true);
+        //jrbInscripto.setSelected(true);
+            
         
     }
 
@@ -103,7 +104,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             }
         });
 
-        jbAnularInscripcion.setText("Anular Inscrpcion");
+        jbAnularInscripcion.setText("Anular Inscripcion");
         jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAnularInscripcionActionPerformed(evt);
@@ -186,6 +187,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jrbInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptoActionPerformed
         jbInscribir.setEnabled(false);
+        jrbInscripto.setSelected(true);
         jrbNoInscripto.setSelected(false);
         limpiarTabla();
         InscripcionData id = new InscripcionData();
@@ -221,6 +223,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jrbNoInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptoActionPerformed
         jbInscribir.setEnabled(true);
+        jrbNoInscripto.setSelected(true);
         jrbInscripto.setSelected(false);
         limpiarTabla();
         InscripcionData id = new InscripcionData();
@@ -284,7 +287,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                 
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(this, "Debe selecionar una materia No-Iscripta del Alumno ");
+            JOptionPane.showMessageDialog(this, "Debe selecionar una materia No-Inscripta del Alumno ");
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
 

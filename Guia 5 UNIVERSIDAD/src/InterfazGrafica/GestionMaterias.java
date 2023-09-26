@@ -324,14 +324,14 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar todos los campos para crear una materia, sin el ID");
         } else {
             try {
-                int codigo = Integer.parseInt(jtCodigo.getText());
+            //    int codigo = Integer.parseInt(jtCodigo.getText());
                 String nombre = jtNombre.getText();
                 int anio = Integer.parseInt(jtAnio.getText());
                 boolean activo = jrActivo.isSelected();
 
                 Materia m1 = new Materia(nombre, anio, activo);
 // pregunta de confirmacion                
-                int input = JOptionPane.showConfirmDialog(null, "Esta seguro de cargar la nueva Materia  : " + codigo, "Seleccione una opcion...",
+                int input = JOptionPane.showConfirmDialog(null, "Esta seguro de cargar la nueva Materia  : " + nombre, "Seleccione una opcion...",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                 if (input == 0) {
                     MateriaData md = new MateriaData();
@@ -340,7 +340,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                 }
 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Debe poner un numero en ID");
+                JOptionPane.showMessageDialog(this, "Debe poner un numero en Año");
             }
 
         }
@@ -373,7 +373,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
         if (jtAnio.getText().isEmpty() || jtNombre.getText().isEmpty() || jrActivo.isSelected() == false) {
-            JOptionPane.showMessageDialog(this, "Debe completar todos los campos para actualizar la MAteria , sin el ID");
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos para actualizar la Materia , sin el ID");
         } else {
             try {
                 int codigo = Integer.parseInt(jtCodigo.getText());
@@ -396,7 +396,7 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 /// poner los valores como figuraban antes??
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Debe poner un numero en ID");
+                JOptionPane.showMessageDialog(this, "Debe poner un numero en ID y Año");
             }
 
         }

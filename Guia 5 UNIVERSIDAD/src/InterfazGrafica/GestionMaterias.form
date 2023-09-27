@@ -277,6 +277,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="jtAnio">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtAnioKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrActivo">
     </Component>

@@ -8,6 +8,7 @@ package InterfazGrafica;
 import AccesoDatos.AlumnoData;
 import Entidades.*;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -85,6 +86,24 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         jLabel6.setText("Fecha de Nacimiento:");
+
+        jtDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDocumentoKeyTyped(evt);
+            }
+        });
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
+
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyTyped(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -351,6 +370,26 @@ public class GestionAlumnos extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(false);
         jdcFechaNacimiento.setDate(null);
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyTyped
+       if(Character.isLetter(evt.getKeyChar())) {
+          evt.consume();
+        }
+        if(evt.getKeyChar()== KeyEvent.VK_SPACE){
+      }
+    }//GEN-LAST:event_jtDocumentoKeyTyped
+
+    private void jtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyTyped
+        if(!(Character.isLetter(evt.getKeyChar())) && !(evt.getKeyChar()== KeyEvent.VK_SPACE)){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jtApellidoKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+       if(!(Character.isLetter(evt.getKeyChar())) && !(evt.getKeyChar()== KeyEvent.VK_SPACE)){
+          evt.consume();
+      }
+    }//GEN-LAST:event_jtNombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

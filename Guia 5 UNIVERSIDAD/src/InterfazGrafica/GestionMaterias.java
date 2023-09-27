@@ -10,6 +10,7 @@ import AccesoDatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Materia;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -132,6 +133,12 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(195, Short.MAX_VALUE)))
         );
+
+        jtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtAnioKeyTyped(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +408,14 @@ public class GestionMaterias extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyTyped
+       if(Character.isLetter(evt.getKeyChar())) {
+          evt.consume();
+        }
+        if(evt.getKeyChar()== KeyEvent.VK_SPACE){
+      }
+    }//GEN-LAST:event_jtAnioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

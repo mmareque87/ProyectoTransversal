@@ -260,6 +260,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             if (input == 0) {
                 id.borrarInscripcionMateriaAlumno(alumnoSel.getIdAlumno(), idMateria);
                 jcbAlumnosActionPerformed(evt);
+                limpiarTabla();
+               
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Debe selecionar del Alumno una materia que este inscripto");
@@ -284,6 +286,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 id.guardarInscripcion(nueva);
+                limpiarTabla();
                 
             }
         } catch (ArrayIndexOutOfBoundsException ex) {

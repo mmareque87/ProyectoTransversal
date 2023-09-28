@@ -286,7 +286,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 id.guardarInscripcion(nueva);
-                limpiarTabla();
+                jrbNoInscriptoActionPerformed(evt);
                 
             }
         } catch (ArrayIndexOutOfBoundsException ex) {

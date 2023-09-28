@@ -260,7 +260,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             if (input == 0) {
                 id.borrarInscripcionMateriaAlumno(alumnoSel.getIdAlumno(), idMateria);
                 jcbAlumnosActionPerformed(evt);
-                limpiarTabla();
+                jrbInscriptoActionPerformed(evt);
                
             }
         } catch (ArrayIndexOutOfBoundsException e) {
